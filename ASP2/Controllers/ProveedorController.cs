@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using ASP2.Models;
 
 namespace ASP2.Controllers
 {
-    public class UsuarioController : Controller
+    public class ProveedorController : Controller
     {
-        // GET: Usuario
+        // GET: Proveedor
         public ActionResult Index()
         {
             using (var db = new inventarioEntities())
             {
-                return View(db.usuario.ToList());
+                return View(db.proveedor.ToList());
 
             }
-            
+
         }
 
         public ActionResult Create()
@@ -29,51 +28,33 @@ namespace ASP2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Create(usuario usuario)
+        public ActionResult Create(proveedor proveedor)
         {
-            if (!ModelState.IsValid)
-                return View();
-
             try
             {
                 using (var db = new inventarioEntities())
                 {
-                    usuario.password = UsuarioController.HashSHA1(usuario.password);
-                    db.usuario.Add(usuario);
+                    db.proveedor.Add(proveedor);
 
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", $"error {ex}");
                 return View();
             }
         }
 
-        public static string HashSHA1(string value)
-        {
-            var sha1 = System.Security.Cryptography.SHA1.Create();
-            var inputBytes = Encoding.ASCII.GetBytes(value);
-            var hash = sha1.ComputeHash(inputBytes);
-
-            var sb = new StringBuilder();
-            for (var i = 0; i < hash.Length; i++)
-            {
-                sb.Append(hash[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
-
         public ActionResult Details(int id)
         {
             using (var db = new inventarioEntities())
             {
-                var findUser = db.usuario.Find(id);
-                return View(findUser);
+                var findSupplier = db.proveedor.Find(id);
+                return View(findSupplier);
             }
         }
 
@@ -83,8 +64,8 @@ namespace ASP2.Controllers
             {
                 using (var db = new inventarioEntities())
                 {
-                    usuario findUser = db.usuario.Where(a => a.id == id).FirstOrDefault();
-                    return View(findUser);
+                    var findSupplier = db.proveedor.Where(a => a.id == id).FirstOrDefault();
+                    return View(findSupplier);
                 }
             }
             catch (Exception ex)
@@ -97,19 +78,18 @@ namespace ASP2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
-        public ActionResult Edit (usuario editUser)
+        public ActionResult Edit(proveedor editSupplier)
         {
             try
             {
                 using (var db = new inventarioEntities())
                 {
-                    var user = db.usuario.Find(editUser.id);
+                    var supplier = db.proveedor.Find(editSupplier.id);
 
-                    user.nombre = editUser.nombre;
-                    user.apellido = editUser.apellido;
-                    user.fecha_nacimiento = editUser.fecha_nacimiento;
-                    user.email = editUser.email;
-                    user.password = editUser.password;
+                    supplier.nombre = editSupplier.nombre;
+                    supplier.direccion = editSupplier.direccion;
+                    supplier.telefono = editSupplier.telefono;
+                    supplier.nombre_contacto = editSupplier.nombre_contacto;
 
                     db.SaveChanges();
 
@@ -129,17 +109,20 @@ namespace ASP2.Controllers
             {
                 using (var db = new inventarioEntities())
                 {
-                    var findUser = db.usuario.Find(id);
-                    db.usuario.Remove(findUser);
+                    var findSupplier = db.proveedor.Find(id);
+                    db.proveedor.Remove(findSupplier);
                     db.SaveChanges();
 
                     return RedirectToAction("Index");
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", $"error {ex}");
                 return View();
             }
         }
+
+
     }
 }
