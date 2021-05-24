@@ -15,7 +15,6 @@ namespace ASP2.Views
             using (var db = new inventarioEntities())
             {
                 return View(db.cliente.ToList());
-
             }
 
         }
