@@ -1,10 +1,10 @@
-﻿@model IEnumerable<ASP2.Models.compra>
+﻿@model IEnumerable<ASP2.Models.producto_compra>
 
 @{
-    ViewBag.Title = "Compra";
+    ViewBag.Title = "Index";
 }
 
-<h2>COMPRA</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,16 +12,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.fecha)
+            Total Compra
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.total)
+            Nombre Producto
         </th>
         <th>
-            Usuario
-        </th>
-        <th>
-            Cliente
+            @Html.DisplayNameFor(model => model.cantidad)
         </th>
         <th></th>
     </tr>
@@ -30,16 +27,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.fecha)
+                @ASP2.Controllers.productoCompraController.totalCompra(item.id_compra)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.total)
+                @ASP2.Controllers.productoCompraController.nombreProducto(item.id_producto)
             </td>
             <td>
-                @ASP2.Controllers.CompraController.nombreUsuario(item.id_usuario)
-            </td>
-            <td>
-                @ASP2.Controllers.CompraController.nombreCliente(item.id_cliente)
+                @Html.DisplayFor(modelItem => item.cantidad)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
