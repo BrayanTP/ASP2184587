@@ -7,18 +7,18 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Agregar producto", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            Nombre
+            Nombre producto
         </th>
         <th>
             Precio Unitario
         </th>
         <th>
-            Descripcion
+            Descripción producto
         </th>
         <th>
             Cantidad
@@ -48,9 +48,9 @@
                 @ASP2.Controllers.ProductoController.nombreProveedor(item.id_proveedor)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.id }, new {@class ="linkDelete" })
+                @Html.ActionLink("Editar", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.id }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.id }, new {@class ="linkDelete" })
             </td>
         </tr>
     }

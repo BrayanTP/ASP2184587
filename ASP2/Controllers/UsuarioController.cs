@@ -5,12 +5,13 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using ASP2.Models;
+using System.Web.Security;
 
 namespace ASP2.Controllers
 {
     public class UsuarioController : Controller
     {
-        // GET: Usuario
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new inventarioEntities())
@@ -140,6 +141,40 @@ namespace ASP2.Controllers
                 ModelState.AddModelError("", $"error {ex}");
                 return View();
             }
+        }
+
+        public ActionResult Login(string message = "")
+        {
+            ViewBag.Message = message;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string user, string password)
+        {
+            string passEncrip = UsuarioController.HashSHA1(password);
+            using (var db = new inventarioEntities())
+            {
+                var userLogin = db.usuario.FirstOrDefault(e => e.email == user && e.password == passEncrip);
+                if (userLogin != null)
+                {
+                    FormsAuthentication.SetAuthCookie(userLogin.email, true);
+                    Session["User"] = userLogin;
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return Login("Verifique sus datos");
+                }
+            }
+        }
+
+        [Authorize]
+        public ActionResult CloseSession()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
