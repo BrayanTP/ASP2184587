@@ -177,7 +177,7 @@ namespace ASP2.Views
                 }
 
             }
-            return View("");
+            return RedirectToAction("Index");
         }
     }
 }
