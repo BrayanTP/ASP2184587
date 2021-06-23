@@ -100,6 +100,10 @@ namespace ASP2.Controllers
 
         public ActionResult Edit (usuario editUser)
         {
+
+            if (!ModelState.IsValid)
+                return View();
+
             try
             {
                 using (var db = new inventarioEntities())

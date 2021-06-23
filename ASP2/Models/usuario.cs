@@ -11,7 +11,8 @@ namespace ASP2.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,10 +22,22 @@ namespace ASP2.Models
         }
     
         public int id { get; set; }
+
+        [Required(ErrorMessage = "No puede ir vacio")]
+        [StringLength(30, ErrorMessage ="Excedio el limite de caracteres")]
         public string nombre { get; set; }
+
+        [Required]
         public string apellido { get; set; }
+
+        [Required]
         public Nullable<System.DateTime> fecha_nacimiento { get; set; }
+
+        [Required]
+        [EmailAddress(ErrorMessage ="Ingrese un Email valido")]
         public string email { get; set; }
+
+        [Required(ErrorMessage = "El campo contraseña no puede ir vacio")]
         public string password { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

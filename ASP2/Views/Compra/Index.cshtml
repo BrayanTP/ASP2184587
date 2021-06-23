@@ -10,21 +10,23 @@
     @Html.ActionLink("Agregar compra", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            Fecha
-        </th>
-        <th>
-            Total
-        </th>
-        <th>
-            Usuario
-        </th>
-        <th>
-            Cliente
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Usuario
+            </th>
+            <th>
+                Cliente
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {

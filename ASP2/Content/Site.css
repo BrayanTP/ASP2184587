@@ -1,7 +1,14 @@
-﻿body {
+﻿*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
-}
+    font-family: 'Mate CS', sans-serif;
+}rge
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -21,4 +28,119 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.navbar {
+    background-color: #1A8A5D;
+    font-family: 'Mate SC', sans-serif;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: white;
+}
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: #7777;
+    text-align: center;
+    font-size: 16px;
+    padding: 10px;
+    right: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: #efefef;
+    text-align: center;
+}
+
+.form-login {
+    width: 400px;
+    height: 340px;
+    background: #0E4A32;
+    margin: auto;
+    margin-top: 100px;
+    box-shadow: 7px 13px 37px #000000;
+    padding: 20px 30px;
+    border-top: 4px solid #1A8A5D;
+    color: white;
+}
+
+.form-login h5{
+    margin: 0;
+    text-align: center;
+    height: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid;
+    font-size: 20px;
+}
+
+.controls {
+    width: 100%;
+    border: 1px solid #1A8A5D;
+    margin-bottom: 15px;
+    padding: 11px 10px;
+    background: #252323;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.buttons {
+    width: 100px;
+    height: 40px;
+    background: #1A8A5D;
+    border: none;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.button {
+    background-color: #0E4A32;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+table{
+    text-align: left;
+    border-collapse: collapse;
+}
+
+th td {
+    padding: 10px;
+}
+
+thead {
+    background-color: #1A8A5D;
+    border-bottom: solid 5px;
+    color: white;
+}
+
+tr:nth-child(even){
+    background-color: #ddd;
+
+}
+
+tr:hover td{
+    background-color: #369681;
+    color: white;
 }

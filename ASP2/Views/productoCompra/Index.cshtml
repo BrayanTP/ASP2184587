@@ -4,24 +4,26 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Producto-Compra</h2>
 
 <p>
     @Html.ActionLink("Agregar producto compra", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            Total Compra
-        </th>
-        <th>
-            Nombre Producto
-        </th>
-        <th>
-            Cantidad
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                Total Compra
+            </th>
+            <th>
+                Nombre Producto
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {

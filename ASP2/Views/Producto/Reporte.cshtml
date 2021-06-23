@@ -7,13 +7,15 @@
 <h2>Reporte</h2>
 
 <table class="table">
-    <tr>
-        <th>Proveedor</th>
-        <th>Proveedor Telefono</th>
-        <th>Proveedor Dirección</th>
-        <th>Producto</th>
-        <th>Prodcuto Precio Unitario</th>
-    </tr>
+    <thead>
+        <tr>
+            <th>Proveedor</th>
+            <th>Proveedor Telefono</th>
+            <th>Proveedor Dirección</th>
+            <th>Producto</th>
+            <th>Producto Precio Unitario</th>
+        </tr>
+    </thead>
     @foreach (var item in Model)
     {
         <tr>
@@ -25,4 +27,8 @@
         </tr>
     }
 </table>
+
+<p>|
+    @Html.ActionLink("Imprimir PDF", "imprimirReporte")
+</p>
 

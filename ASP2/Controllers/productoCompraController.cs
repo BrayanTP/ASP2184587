@@ -9,6 +9,8 @@ namespace ASP2.Controllers
 {
     public class productoCompraController : Controller
     {
+
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new inventarioEntities())
@@ -91,6 +93,10 @@ namespace ASP2.Controllers
 
         public ActionResult Edit(producto_compra proCompraEdit)
         {
+
+            if (!ModelState.IsValid)
+                return View();
+
             try
             {
                 using (var db = new inventarioEntities())

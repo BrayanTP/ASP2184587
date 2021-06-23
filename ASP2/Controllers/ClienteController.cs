@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ASP2.Models;
+using System.IO;
 
 namespace ASP2.Views
 {
     public class ClienteController : Controller
     {
-        // GET: Cliente
+
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new inventarioEntities())
@@ -59,6 +61,10 @@ namespace ASP2.Views
 
         public ActionResult Edit(int id)
         {
+
+            if (!ModelState.IsValid)
+                return View();
+
             try
             {
                 using (var db = new inventarioEntities())
@@ -120,6 +126,58 @@ namespace ASP2.Views
                 ModelState.AddModelError("", $"error {ex}");
                 return View();
             }
+        }
+
+        public ActionResult cargarCSV()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult cargarCSV(HttpPostedFileBase fileForms)
+        {
+            
+            string filePath = string.Empty;
+
+            if (fileForms != null)
+            {
+                
+                string path = Server.MapPath("~/Uploads/");
+
+                
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                filePath = path + Path.GetFileName(fileForms.FileName);
+                
+                string extension = Path.GetExtension(fileForms.FileName);
+
+                fileForms.SaveAs(filePath);
+
+                string csvData = System.IO.File.ReadAllText(filePath);
+                foreach (string row in csvData.Split('\n'))
+                {
+                    if (!string.IsNullOrEmpty(row))
+                    {
+                        var newCliente= new cliente
+                        {
+                            nombre = row.Split(';')[0],
+                            documento = row.Split(';')[1],
+                            email = row.Split(';')[2]
+                        };
+
+                        using (var db = new inventarioEntities())
+                        {
+                            db.cliente.Add(newCliente);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+
+            }
+            return View("");
         }
     }
 }

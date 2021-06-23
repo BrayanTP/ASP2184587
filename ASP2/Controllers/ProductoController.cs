@@ -4,11 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ASP2.Models;
+using Rotativa;
 
 namespace ASP2.Controllers
 {
     public class ProductoController : Controller
     {
+
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new inventarioEntities())
@@ -74,6 +77,11 @@ namespace ASP2.Controllers
 
         public ActionResult Edit(producto productEdit)
         {
+
+            if (!ModelState.IsValid)
+                return View();
+
+
             try
             {
                 using(var db = new inventarioEntities())
@@ -136,6 +144,11 @@ namespace ASP2.Controllers
                             };
                 return View(query);
             
+        }
+
+        public ActionResult imprimirReporte()
+        {
+            return new ActionAsPdf("Reporte") { FileName = "Reporte.pdf" };
         }
     }
 }

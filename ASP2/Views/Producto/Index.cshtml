@@ -1,33 +1,35 @@
 ﻿@model IEnumerable<ASP2.Models.producto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Producto";
 }
 
-<h2>Index</h2>
+<h2>Producto</h2>
 
 <p>
     @Html.ActionLink("Agregar producto", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            Nombre producto
-        </th>
-        <th>
-            Precio Unitario
-        </th>
-        <th>
-            Descripción producto
-        </th>
-        <th>
-            Cantidad
-        </th>
-        <th>
-            Proveedor
-        </th>
-        <th></th>
-    </tr>
+    <thead>
+        <tr>
+            <th>
+                Nombre producto
+            </th>
+            <th>
+                Precio Unitario
+            </th>
+            <th>
+                Descripción producto
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Proveedor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
     @foreach (var item in Model)
     {

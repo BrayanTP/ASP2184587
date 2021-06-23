@@ -4,12 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using ASP2.Models;
+using Rotativa;
 
 namespace ASP2.Controllers
 {
     public class CompraController : Controller
     {
-       
+
+        [Authorize]
         public ActionResult Index()
         {
             using (var db = new inventarioEntities())
@@ -92,6 +94,10 @@ namespace ASP2.Controllers
 
         public ActionResult Edit(compra purchaseEdit)
         {
+
+            if (!ModelState.IsValid)
+                return View();
+
             try
             {
                 using (var db = new inventarioEntities())
@@ -137,6 +143,27 @@ namespace ASP2.Controllers
                 ModelState.AddModelError("", $"error {Ex}");
                 return View();
             }
+        }
+
+        public ActionResult Revision()
+        {
+            var db = new inventarioEntities();
+            var query = from tabCliente in db.cliente
+                        join tabCompra in db.compra on tabCliente.id equals tabCompra.id_cliente
+                        select new Revision
+                        {
+                            nombreCliente = tabCliente.nombre,
+                            documentoCliente = tabCliente.documento,
+                            emailCliente = tabCliente.email,
+                            fechaCompra = tabCompra.fecha,
+                            totalCompra = tabCompra.total
+                        };
+            return View(query);
+        }
+
+        public ActionResult ImprimirRevision()
+        {
+            return new ActionAsPdf("Revision") { FileName = "Revision.pdf" };
         }
     }
 }
